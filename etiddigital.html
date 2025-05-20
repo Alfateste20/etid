@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Museu Virtual Militar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #3e4d35;
+      color: #0f0f0f;
+      padding: 0rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header img {
+      height: 160px;
+      margin-right: 10px;
+    }
+
+    header h1 {
+      font-family: 'Black Ops One', cursive;
+      font-size: 4em;
+      color: #000000;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: lighter;
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    nav {
+      font-family: 'Black Ops One', cursive;
+      font-weight: normal;
+      width: 250px;
+      background-color: #2f3b25;
+      color: white;
+      padding-top: 1rem;
+      position: sticky;
+      top: 70px;
+      flex-shrink: 0;
+    }
+
+    nav h2 {
+      padding: 1rem;
+      font-size: 1rem;
+      border-bottom: 1px solid #4a5a3a;
+    }
+
+    .menu-item {
+      cursor: pointer;
+      padding: 1rem;
+      border-bottom: 1px solid #4a5a3a;
+      background-color: #2f3b25;
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .menu-item:hover,
+    .menu-item.active {
+      background-color: #3a4a31;
+    }
+
+    .submenu {
+      display: none;
+      background-color: #2f7603;
+    }
+
+    .submenu .submenu-item {
+      text-align: unset;
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+      border-bottom: 1px solid #4a5a3a;
+      background-color: #000000;
+    }
+
+    .submenu .submenu-item:hover {
+      color: #000000;
+      background-color: #838483;
+    }
+
+    .menu-item.open + .submenu {
+      display: block;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    .grid-gallery {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #e3e3d3;
+      border: 1px solid #c4c4a5;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .card .card-content {
+      padding: 0.3rem;
+    }
+
+    .card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+      color: #2f3b25;
+      font-family: 'Black Ops One', cursive;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #4a4a4a;
+    }
+
+    #conteudo-dinamico {
+      padding: 2rem;
+      display: none;
+      flex-direction: column;
+    }
+
+    #voltar-btn {
+      background-color: #2f3b25;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-family: 'Black Ops One', cursive;
+      margin-bottom: 20px;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+
+    #voltar-btn:hover {
+      background-color: #3a4a31;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100vh;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      nav {
+        width: 100%;
+        position: relative;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="icones/logo_cdout.png" alt="Logo do Museu">
+    <h1>ETID DIGITAL</h1>
+  </header>
+
+  <div id="conteudo-dinamico"></div>
+
+  <div class="container" id="galeria-container">
+    <nav>
+      <h2>Explorar</h2>
+      <div class="menu-item" data-filter="historico-etid">Histórico do ETID</div>
+
+      <div class="menu-item" data-filter="desc-emblema">Descrição do Emblema C Dout Ex</div>
+
+      <div class="menu-item" data-dropdown>Designação Histórica</div>
+      <div class="submenu">
+        <div class="submenu-item" data-filter="denominacao">Texto alusivo à denominação histórica do ETID</div>
+        <div class="submenu-item" data-filter="armas-antigas">Espaço Batalha do Monte das Tabocas</div>
+        <div class="submenu-item" data-filter="portaria">Portaria DCEx</div>
+        <div class="submenu-item" data-filter="armas-modernas">Foto Aço Letras</div>
+      </div>
+
+      <div class="menu-item" data-dropdown>A MAIS</div>
+      <div class="submenu">
+        <div class="submenu-item" data-filter="herois-feb">Heróis da FEB</div>
+        <div class="submenu-item" data-filter="farda-combate">Campanha Aérea do 1º G Av Caça</div>
+        <div class="submenu-item" data-filter="farda-historica">Campanha da FEB</div>
+      </div>
+
+      <div class="menu-item" data-dropdown>Missões</div>
+      <div class="submenu">
+        <div class="submenu-item" data-filter="missao-guerra">Segunda Guerra</div>
+        <div class="submenu-item" data-filter="missao-onu">ONU</div>
+      </div>
+
+      <div class="menu-item active" data-filter="todos">Mostrar Todos</div>
+    </nav>
+
+    <main>
+      <section class="grid-gallery" id="galeria">
+        <div class="card" data-categoria="historico-etid" data-pagina="historico-etid.html">
+          <img src="imagens/article-10.jpg" alt="Canhão">
+          <div class="card-content">
+            <h3>HISTÓRICO DO ETID</h3>
+            <p>Descreve o Histórico do Espaço de Trabalho Iterativo do Centro de Doutrina do Exército.</p>
+          </div>
+        </div>
+
+        <div class="card" data-categoria="desc-emblema" data-pagina="desc-emblema.html">
+          <img src="icones/logocdout.png" alt="Canhão">
+          <div class="card-content">
+            <h3>EMBLEMA C DOUT EX</h3>
+            <p> Descrição do emblema do Centro de Doutrina do Exército.</p>
+          </div>
+        </div>
+
+        <div class="card" data-categoria="portaria" data-pagina="portaria.html">
+          <img src="imagens/portaria.jpg" alt="Canhão">
+          <div class="card-content">
+            <h3>PORTARIA Nº 168 DCEX</h3>
+            <p> Portaria que concede Denominação histórica de instalação para o ETID.</p>
+          </div>
+        </div>
+
+        <div class="card" data-categoria="denominacao" data-pagina="denominacao.html">
+          <img src="imagens/dh.png" alt="Canhão">
+          <div class="card-content">
+            <h3>DENOMINAÇÃO HISTÓRICA</h3>
+            <p> Alusivo à denominação histórica do ETID.</p>
+          </div>
+        </div>
+
+        <div class="card" data-categoria="herois-feb" data-pagina="Untitled-1.html">
+          <img src="imagens/heroisdafeb.jpg" alt="Canhão">
+          <div class="card-content">
+            <h3>Heróis da FEB</h3>
+            <p>Vídeos Heróis da FEB </p>
+          </div>
+        </div>
+
+        <div class="card" data-categoria="armas-antigas">
+          <img src="img1.jpg" alt="Canhão">
+          <div class="card-content">
+            <h3>Canhão Krupp</h3>
+            <p>Arma de artilharia da Primeira Guerra.</p>
+          </div>
+        </div>
+
+        <div class="card" data-categoria="armas-modernas">
+          <img src="img2.jpg" alt="Fuzil moderno">
+          <div class="card-content">
+            <h3>Fuzil IA2</h3>
+            <p>Fuzil de assalto moderno do EB .</p>
+          </div>
+        </div>
+
+        <div class="card" data-categoria="farda-combate">
+          <img src="img3.jpg" alt="Farda Combate">
+          <div class="card-content">
+            <h3>Farda de Selva</h3>
+            <p>Usada em missões na Amazônia.</p>
+          </div>
+        </div>
+
+        <div class="card" data-categoria="farda-historica">
+          <img src="img4.jpg" alt="Uniforme Histórico">
+          <div class="card-content">
+            <h3>Uniforme FEB</h3>
+            <p>Usado na Segunda Guerra Mundial.</p>
+          </div>
+        </div>
+
+        <div class="card" data-categoria="missao-guerra">
+          <img src="img5.jpg" alt="FEB">
+          <div class="card-content">
+            <h3>FEB na Itália</h3>
+            <p>Participação na campanha da Itália.</p>
+          </div>
+        </div>
+
+        <div class="card" data-categoria="missao-onu">
+          <img src="img6.jpg" alt="ONU">
+          <div class="card-content">
+            <h3>Missão ONU</h3>
+            <p>Missão de paz internacional.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Dropdown do menu lateral
+    document.querySelectorAll('[data-dropdown]').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('open');
+      });
+    });
+
+    // Filtro simples por categoria (mostra/esconde cards)
+    document.querySelectorAll('[data-filter]').forEach(filtro => {
+      filtro.addEventListener('click', () => {
+        document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+        filtro.classList.add('active');
+
+        const categoria = filtro.getAttribute('data-filter');
+        const cards = document.querySelectorAll('.card');
+
+        if(categoria === 'todos') {
+          cards.forEach(card => card.style.display = 'block');
+        } else {
+          cards.forEach(card => {
+            if(card.getAttribute('data-categoria') === categoria) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
+      });
+    });
+
+    // Clique nos cards que têm data-pagina para abrir iframe
+    document.querySelectorAll('.card[data-pagina]').forEach(card => {
+      card.addEventListener('click', () => {
+        const pagina = card.getAttribute('data-pagina');
+        if (!pagina) return;
+
+        const conteudo = document.getElementById('conteudo-dinamico');
+        const galeria = document.getElementById('galeria-container');
+
+        galeria.style.display = 'none';
+        conteudo.style.display = 'flex';
+
+        conteudo.innerHTML = `
+          <button id="voltar-btn">← Voltar</button>
+          <iframe src="${pagina}" ></iframe>
+        `;
+
+        document.getElementById('voltar-btn').addEventListener('click', () => {
+          conteudo.innerHTML = '';
+          conteudo.style.display = 'none';
+          galeria.style.display = 'flex';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

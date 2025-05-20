@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Museu Militar</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+      color: #333;
+    }
+
+    h2 {
+      color: #2d3c2b;
+    }
+
+    .parallax {
+      font-family: 'Black Ops One', cursive;
+      font-size: 3em;
+      flex-direction: column;
+      color: #046900;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: lighter;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      padding: 20px;
+    }
+
+    .logo-parallax {
+      max-width: 150px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .titulo-parallax {
+      font-size: 2em;
+    }
+
+    section {
+      padding: 30px 20px;
+      text-align: center;
+      background-color: #d1d1d1;
+    }
+
+    .card {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card .descricao {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .galeria img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border: 4px solid #4b5e3b;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+      border-color: #2d3c2b;
+    }
+
+    .menu-horizontal {
+      font-family: 'Black Ops One', cursive;
+      width: 100%;
+      background-color: #4b5e3b;
+      display: flex;
+      justify-content: center;
+    }
+
+    .dropdown-menu {
+      font-family: 'Black Ops One', cursive;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      width: 60%;
+      justify-content: space-between;
+    }
+
+    .dropdown {
+      font-family: 'Black Ops One', cursive;
+      position: relative;
+      flex: 1;
+      text-align: center;
+    }
+
+    .dropdown-toggle {
+      font-family: 'Black Ops One', cursive;
+      background-color: #4b5e3b;
+      color: white;
+      padding: 16px 0;
+      width: 100%;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: border-bottom 0.3s ease, background 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    .dropdown-toggle:hover {
+      background-color: #3c4e2f;
+    }
+
+    .dropdown.active .dropdown-toggle {
+      border-bottom: 3px solid #000000;
+    }
+
+    .submenu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      background-color: #5f724e;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      min-width: 200px;
+      padding: 0;
+    }
+
+    .submenu li {
+      list-style: none;
+    }
+
+    .submenu li a {
+      display: block;
+      padding: 10px 15px;
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid #4c5f40;
+      cursor: pointer;
+    }
+
+    .submenu li a:hover {
+      background-color: #3c4e2f;
+    }
+
+    .dropdown.active .submenu {
+      display: block;
+    }
+
+
+
+    #iframe-artigo {
+      display: none;
+      width: 100%;
+      height: 800px;
+      border: none;
+      margin-top: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      background: white;
+    }
+
+    footer {
+      background-color: #2d3c2b;
+      color: white;
+      padding: 30px 10px;
+      text-align: center;
+    }
+
+    #artigos h2 {
+      color: #3c4e2f;
+      font-family: 'Black Ops One', cursive;
+      font-size: 1.8em;
+    }
+
+    @media (max-width: 600px) {
+      .titulo-parallax {
+        font-size: 1.5em;
+      }
+
+      .dropdown-menu {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .dropdown-toggle {
+        padding: 12px;
+        font-size: 1em;
+      }
+
+      .galeria img {
+        height: 150px;
+      }
+
+      .card .descricao {
+        font-size: 12px;
+      }
+
+      iframe#iframe-artigo {
+        height: 800px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Parallax inicial -->
+  <div class="parallax" style="background-image: url('imagens/parallax1.jpg');">
+    <img src="icones/logo_cdout.png" alt="Logo" class="logo-parallax">
+    <div class="titulo-parallax">ETID DIGITAL</div>
+  </div>
+
+  <!-- Artigos -->
+  <section id="artigos">
+    <h2>ESPAÇO DE TRABALHO ITERATIVO DE DOUTRINA</h2>
+    <nav class="menu-horizontal">
+      <ul class="dropdown-menu">
+        <li class="dropdown">
+          <button class="dropdown-toggle">Sobre o ETID</button>
+          <ul class="submenu">
+            <li><a href="#" data-file="historico-etid.html">Histórico do ETID</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <button class="dropdown-toggle">Emblema C Dout Ex</button>
+          <ul class="submenu">
+            <li><a href="#" data-file="desc-emblema.html">Descrição do Emblema C Dout Ex</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <button class="dropdown-toggle">Designação Histórica</button>
+          <ul class="submenu">
+            <li><a href="#" data-file="denominacao.html">Espaço Batalha do Monte das Tabocas</a></li>
+            <li><a href="#" data-file="portaria.html">Portaria DCEx</a></li>
+            <li><a href="#" data-file="artigos/tecnologia-veiculos.html">Foto Aço Letras</a></li>
+            <li><a href="#" data-file="quadro-evo.html">Evolução Descrição da Obra</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <button class="dropdown-toggle">+ Conteúdos</button>
+          <ul class="submenu">
+            <li><a href="#" data-file="Untitled-1.html">HERÓIS DA FEB</a></li>
+            <li><a href="#" data-file="artigos/historia-marcos.html">Campanha Aérea do 1º G Av Caça</a></li>
+            <li><a href="#" data-file="artigos/historia-museus.html">Campanha da FEB</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <iframe id="iframe-artigo" src="" title="Artigo do Museu Militar"></iframe>
+  </section>
+
+  <!-- Galeria de Equipamentos -->
+  <section id="galeria">
+    <h2>Central de Conteúdos</h2>
+    <div class="galeria">
+      <div class="card" data-file="artigos/tanque.html">
+        <img src="imagens/6.png" alt="Tanque" />
+        <div class="descricao">Tanque de guerra</div>
+      </div>
+      <div class="card" data-file="artigos/armas.html">
+        <img src="imagens/7.png" alt="Armas" />
+        <div class="descricao">Armamento pesado</div>
+      </div>
+      <div class="card" data-file="artigos/uniformes.html">
+        <img src="imagens/8.png" alt="Uniformes" />
+        <div class="descricao">Uniforme histórico</div>
+      </div>
+      <div class="card" data-file="artigos/helicoptero.html">
+        <img src="imagens/9.png" alt="Helicóptero militar" />
+        <div class="descricao">Helicóptero de ataque</div>
+      </div>
+            <div class="card" data-file="artigos/tanque.html">
+        <img src="imagens/10.png" alt="Tanque" />
+        <div class="descricao">Artigos e curiosidades da Doutrina</div>
+      </div>
+      <div class="card" data-file="artigos/armas.html">
+        <img src="imagens/7.png" alt="Armas" />
+        <div class="descricao">Armamento pesado</div>
+      </div>
+      <div class="card" data-file="artigos/uniformes.html">
+        <img src="imagens/8.png" alt="Uniformes" />
+        <div class="descricao">Uniforme histórico</div>
+      </div>
+      <div class="card" data-file="artigos/helicoptero.html">
+        <img src="imagens/9.png" alt="Helicóptero militar" />
+        <div class="descricao">Helicóptero de ataque</div>
+      </div>
+            <div class="card" data-file="artigos/tanque.html">
+        <img src="imagens/6.png" alt="Tanque" />
+        <div class="descricao">Tanque de guerra</div>
+      </div>
+      <div class="card" data-file="artigos/armas.html">
+        <img src="imagens/7.png" alt="Armas" />
+        <div class="descricao">Armamento pesado</div>
+      </div>
+      <div class="card" data-file="artigos/uniformes.html">
+        <img src="imagens/8.png" alt="Uniformes" />
+        <div class="descricao">Uniforme histórico</div>
+      </div>
+      <div class="card" data-file="artigos/helicoptero.html">
+        <img src="imagens/9.png" alt="Helicóptero militar" />
+        <div class="descricao">Helicóptero de ataque</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parallax intermediário -->
+  <div class="parallax" style="background-image: url('imagens/fotocdoutparallax.jpg');">
+    <img src="icones/coter.png" alt="Logo" class="logo-parallax">
+  </div>
+
+  <!-- Parallax final -->
+  <div class="parallax" style="background-image: url('https://images.unsplash.com/photo-1594729095022-e2f6d2b1bafd');">
+    <div class="titulo-parallax">Patrimônio Histórico</div>
+  </div>
+
+  <footer>
+    &copy; 2025 Espaço de Trabalho Iterativo de Doutrina. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    document.querySelectorAll('.dropdown-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const parent = button.parentElement;
+        document.querySelectorAll('.dropdown').forEach(d => {
+          if (d !== parent) d.classList.remove('active');
+        });
+        parent.classList.toggle('active');
+      });
+    });
+
+    document.querySelectorAll('[data-file]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const file = link.getAttribute('data-file');
+        const iframe = document.getElementById('iframe-artigo');
+        iframe.src = file;
+        iframe.style.display = 'block';
+        iframe.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+
+</html>

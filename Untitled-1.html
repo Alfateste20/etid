@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Heróis da FEB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+    background-image: url('imagens/febimage01.jpg'); /* Caminho para sua imagem */
+    background-size: cover; /* Faz a imagem cobrir toda a tela */
+    background-position: center; /* Centraliza a imagem na tela */
+    background-attachment: fixed; /* Faz a imagem de fundo não se mover ao rolar a página */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding-top: 80px; /* espaço para o cabeçalho fixo */
+        }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #406635;
+      color: white;
+      display: flex;
+      text-align: center;
+      padding: 15px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    header img {
+      height: 80px;
+      margin-right: 20px;
+      align-items: center;
+    }
+
+    header h1 {
+      font-family: 'Black Ops One', cursive;
+      font-size: 2.5em;
+      color: #fefdfd;
+      font-weight: lighter;
+    }
+
+    .tree-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .tree-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin: 40px 0;
+    }
+
+    .tree-link {
+        display: inline-flex; /* Alterei de flex para inline-flex para manter o alinhamento */
+        align-items: center;
+        background-color: #fff;
+        color: #333;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: background-color 0.3s, transform 0.2s;
+        white-space: nowrap;
+        cursor: pointer;
+        font-family: 'Arial', sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #2e8b57;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .tree-link:hover {
+      background-color: #d0e0c0;
+      transform: scale(1.05);
+    }
+
+    .tree-link .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 0;
+      width: 80%;
+      max-width: 800px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .modal-content video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .close {
+      color: #aaa;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .tree-link {
+        min-width: 160px;
+        font-size: 14px;
+      }
+
+      header h1 {
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tree-link {
+        min-width: 140px;
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+
+      .tree-row {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="icones/logofeb.png" alt="Logo">
+    <h1>HERÓIS DA FEB</h1>
+  </header>
+
+  <div class="tree-container">
+    <div class="tree-row">
+      <a class="tree-link" onclick="openModal('videos/video1.mp4')"><img src="icones/logofeb.png" class="icon"> Rendição da 148 Divisão Alemã</a>
+    </div>
+    <div class="tree-row">
+      <a class="tree-link" onclick="openModal('videos/video2.mp4')"><img src="icones/logofeb.png" class="icon"> MONTE CASTELO - Ten APOLLO</a>
+      <a class="tree-link" onclick="openModal('videos/video3.mp4')"><img src="icones/logofeb.png" class="icon"> Link 3</a>
+    </div>
+    <div class="tree-row">
+      <a class="tree-link" onclick="openModal('videos/video4.mp4')"><img src="icones/logofeb.png" class="icon"> Link 4</a>
+      <a class="tree-link" onclick="openModal('videos/video5.mp4')"><img src="icones/logofeb.png" class="icon"> Link 5</a>
+      <a class="tree-link" onclick="openModal('videos/video6.mp4')"><img src="icones/logofeb.png" class="icon"> Link 6</a>
+    </div>
+    <div class="tree-row">
+      <a class="tree-link" onclick="openModal('videos/video7.mp4')"><img src="icones/logofeb.png" class="icon"> Link 7</a>
+      <a class="tree-link" onclick="openModal('videos/video8.mp4')"><img src="icones/logofeb.png" class="icon"> Link 8</a>
+      <a class="tree-link" onclick="openModal('videos/video9.mp4')"><img src="icones/logofeb.png" class="icon"> Link 9</a>
+      <a class="tree-link" onclick="openModal('videos/video10.mp4')"><img src="icones/logofeb.png" class="icon"> Link 10</a>
+    </div>
+    <div class="tree-row">
+      <a class="tree-link" onclick="openModal('videos/video11.mp4')"><img src="icones/logofeb.png" class="icon"> Link 11</a>
+      <a class="tree-link" onclick="openModal('videos/video12.mp4')"><img src="icones/logofeb.png" class="icon"> Link 12</a>
+    </div>
+  </div>
+
+  <div id="videoModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <video id="modalVideo" controls>
+        <source id="modalSource" src="" type="video/mp4">
+        Seu navegador não suporta vídeo HTML5.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    function openModal(src) {
+      const modal = document.getElementById("videoModal");
+      const video = document.getElementById("modalVideo");
+      const source = document.getElementById("modalSource");
+
+      source.src = src;
+      video.load();
+      video.play();
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("videoModal");
+      const video = document.getElementById("modalVideo");
+      video.pause();
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("videoModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+
+</body>
+</html>
