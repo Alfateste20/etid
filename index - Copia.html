@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Museu Militar</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+      color: #333;
+    }
+
+    h2 {
+      color: #2d3c2b;
+    }
+
+    .parallax {
+      font-family: 'Black Ops One', cursive;
+      font-size: 3em;
+      flex-direction: column;
+      color: #046900;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: lighter;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      padding: 20px;
+    }
+
+    .logo-parallax {
+      max-width: 150px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .titulo-parallax {
+      font-size: 2em;
+    }
+
+    section {
+      padding: 30px 20px;
+      text-align: center;
+      background-color: #d1d1d1;
+    }
+
+    .card {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card .descricao {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .galeria img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border: 4px solid #4b5e3b;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+      border-color: #2d3c2b;
+    }
+
+    .menu-horizontal {
+      font-family: 'Black Ops One', cursive;
+      width: 100%;
+      background-color: #4b5e3b;
+      display: flex;
+      justify-content: center;
+    }
+
+    .dropdown-menu {
+      font-family: 'Black Ops One', cursive;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      width: 60%;
+      justify-content: space-between;
+    }
+
+    .dropdown {
+      font-family: 'Black Ops One', cursive;
+      position: relative;
+      flex: 1;
+      text-align: center;
+    }
+
+    .dropdown-toggle {
+      font-family: 'Black Ops One', cursive;
+      background-color: #4b5e3b;
+      color: white;
+      padding: 16px 0;
+      width: 100%;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: border-bottom 0.3s ease, background 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    .dropdown-toggle:hover {
+      background-color: #3c4e2f;
+    }
+
+    .dropdown.active .dropdown-toggle {
+      border-bottom: 3px solid #000000;
+    }
+
+    .submenu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      background-color: #5f724e;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      min-width: 200px;
+      padding: 0;
+    }
+
+    .submenu li {
+      list-style: none;
+    }
+
+    .submenu li a {
+      display: block;
+      padding: 10px 15px;
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid #4c5f40;
+      cursor: pointer;
+    }
+
+    .submenu li a:hover {
+      background-color: #3c4e2f;
+    }
+
+    .dropdown.active .submenu {
+      display: block;
+    }
+
+
+
+    #iframe-artigo {
+      display: none;
+      width: 100%;
+      height: 800px;
+      border: none;
+      margin-top: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      background: white;
+    }
+
+    footer {
+      background-color: #2d3c2b;
+      color: white;
+      padding: 30px 10px;
+      text-align: center;
+    }
+
+    #artigos h2 {
+      color: #3c4e2f;
+      font-family: 'Black Ops One', cursive;
+      font-size: 1.8em;
+    }
+
+    @media (max-width: 600px) {
+      .titulo-parallax {
+        font-size: 1.5em;
+      }
+
+      .dropdown-menu {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .dropdown-toggle {
+        padding: 12px;
+        font-size: 1em;
+      }
+
+      .galeria img {
+        height: 150px;
+      }
+
+      .card .descricao {
+        font-size: 12px;
+      }
+
+      iframe#iframe-artigo {
+        height: 800px;
+      }
+    }
+
+  .menu-container {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    transition: transform 1s ease;
+  }
+
+  .menu-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: none;
+    background-color: #ffffff;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 0 15px #e8f401;
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .menu-button img {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  .menu-button:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 20px #00ff00;
+  }
+
+  .orbit-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-family: 'Rajdhani', sans-serif;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 0 10px #00ff00;
+    transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px;
+  }
+
+  /* Cores diferentes para cada botão */
+  #btn1 {
+    background-color: #930202;
+  }
+  #btn2 {
+    background-color: #0421c2;
+  }
+  #btn3 {
+    background-color: #ff9800;
+  }
+  #btn4 {
+    background-color: #02c212;
+  }
+  #btn5 {
+    background-color: #05fcf3;
+  }
+
+  /* Hover mais claro */
+  #btn1:hover {
+    background-color: #f60202;
+  }
+  #btn2:hover {
+    background-color: #5c6bc0;
+  }
+  #btn3:hover {
+    background-color: #ffb74d;
+  }
+  #btn4:hover {
+    background-color: #26a69a;
+  }
+  #btn5:hover {
+    background-color: #ba68c8;
+  }
+
+  .menu-container.active .orbit-button {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-container.active {
+    animation: rotate 0.8s ease forwards;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .menu-container {
+      width: 220px;
+      height: 220px;
+    }
+
+    .menu-button {
+      width: 60px;
+      height: 60px;
+      font-size: 18px;
+    }
+
+    .orbit-button {
+      width: 60px;
+      height: 60px;
+      font-size: 12px;
+      padding: 5px;
+    }
+  }
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Parallax inicial -->
+  <div class="parallax" style="background-image: url('imagens/parallax1.jpg');">
+    <img src="icones/logo_cdout.png" alt="Logo" class="logo-parallax">
+    <div class="titulo-parallax">ETID DIGITAL</div>
+  </div>
+
+  <!-- Artigos -->
+  <section id="artigos">
+    <h2>ESPAÇO DE TRABALHO ITERATIVO DE DOUTRINA</h2>
+    <nav class="menu-horizontal">
+      <ul class="dropdown-menu">
+        <li class="dropdown">
+          <button class="dropdown-toggle">Sobre o ETID</button>
+          <ul class="submenu">
+            <li><a href="#" data-file="historico-etid.html">Histórico do ETID</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <button class="dropdown-toggle">Emblema C Dout Ex</button>
+          <ul class="submenu">
+            <li><a href="#" data-file="desc-emblema.html">Descrição do Emblema C Dout Ex</a></li>
+            <li><a href="#" data-file="documentos/video_emblema.html">Filmete Evolução Emblema C Dout Ex</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <button class="dropdown-toggle">Designação Histórica</button>
+          <ul class="submenu">
+            <li><a href="#" data-file="denominacao.html">Espaço Batalha do Monte das Tabocas</a></li>
+            <li><a href="#" data-file="portaria.html">Portaria DCEx</a></li>
+            <li><a href="#" data-file="artigos/tecnologia-veiculos.html">Foto Aço Letras</a></li>
+            <li><a href="#" data-file="quadro-evo.html">Evolução Descrição da Obra</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <button class="dropdown-toggle">+ Conteúdos</button>
+          <ul class="submenu">
+            <li><a href="#" data-file="Untitled-1.html">HERÓIS DA FEB</a></li>
+            <li><a href="#" data-file="artigos/historia-marcos.html">Campanha Aérea do 1º G Av Caça</a></li>
+            <li><a href="#" data-file="artigos/historia-museus.html">Campanha da FEB</a></li>
+            <li><a href="#" data-file="campanhaparaguay.html">Campanha da Paraguay</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <iframe id="iframe-artigo" src="" title="Artigo do Museu Militar"></iframe>
+    <button id="btn-fechar" style="display:none; margin-top:10px; padding:8px 16px; background-color:#4b5e3b; color:white; border:none; border-radius:4px; cursor:pointer;">
+  Fechar Conteúdo
+</button>
+  </section>
+
+  <!-- Galeria de Equipamentos -->
+  <section id="galeria">
+    <h2>Central de Conteúdos</h2>
+    <div class="galeria">
+      <div class="card" data-file="denominacao.html">
+        <img src="imagens/6.png" alt="Tanque" />
+        <div class="descricao"><!--Teste--></div>
+      </div>
+      <div class="card" data-file="documentos/portariadecex.html">
+        <img src="imagens/7.png" alt="Armas" />
+        <div class="descricao"><!--Teste--></div>
+      </div>
+      <div class="card" data-file="artigos/uniformes.html">
+        <img src="imagens/8.png" alt="Uniformes" />
+        <div class="descricao"><!--Teste--></div>
+      </div>
+      <div class="card" data-file="tourvirtual.html">
+        <img src="imagens/tour.jpg" alt="Helicóptero militar" />
+        <div class="descricao"><!--Teste--></div>
+      </div>
+      <div class="card" data-file="artigos/tanque.html">
+        <img src="imagens/10.png" alt="Tanque" />
+        <div class="descricao">Artigos e curiosidades da Doutrina</div>
+      </div>
+      <div class="card" data-file="galeriasketch3D/galeriamockup3d.html">
+        <img src="imagens/blindado.png" alt="Armas" />
+        <div class="descricao">Galeria Veículos e Equipamentos Militares 3D</div>
+      </div>
+      <div class="card" data-file="livro_caxias.html">
+        <img src="imagens/icon_caxias.png" alt="Uniformes" />
+        <div class="descricao"><!--Teste--></div>
+      </div>
+      <div class="card" data-file="artigos/helicoptero.html">
+        <img src="imagens/9.png" alt="Helicóptero militar" />
+        <div class="descricao"><!--Teste--></div>
+      </div>
+      <div class="card" data-file="artigos/tanque.html">
+        <img src="imagens/6.png" alt="Tanque" />
+        <div class="descricao"><!--Teste--></div>
+      </div>
+      <div class="card" data-file="artigos/armas.html">
+        <img src="imagens/7.png" alt="Armas" />
+        <div class="descricao"><!--Teste--></div>
+      </div>
+      <div class="card" data-file="artigos/uniformes.html">
+        <img src="imagens/8.png" alt="Uniformes" />
+        <div class="descricao"><!--Teste--></div>
+      </div>
+      <div class="card" data-file="artigos/helicoptero.html">
+        <img src="imagens/9.png" alt="Helicóptero militar" />
+        <div class="descricao"><!--Teste--></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parallax intermediário -->
+  <div class="parallax" style="background-image: url('imagens/fotocdoutparallax.jpg');">
+    <img src="icones/coter.png" alt="Logo" class="logo-parallax">
+  </div>
+
+  <!-- Parallax final -->
+  <div class="parallax" style="background-image: url('imagens/parallax8.jpg');">
+    <div class="titulo-parallax">
+
+
+       <div class="menu-container" id="menu">
+    <button class="menu-button" onclick="toggleMenu()">
+      <img src="icones/logo_cdout2.png" alt="Logo COTER" />
+    </button>
+
+    <button class="orbit-button" id="btn1" onclick="acao('ETID DIGITAL')">ETID DIGITAL</button>
+    <button class="orbit-button" id="btn2" onclick="acao('TOUR VIRTUAL')">TOUR VIRTUAL</button>
+    <button class="orbit-button" id="btn3" onclick="acao('PORTAL C DOUT Ex')">PORTAL C DOUT Ex</button>
+    <button class="orbit-button" id="btn4" onclick="acao('GALERIA 3D')">GALERIA 3D</button>
+    <button class="orbit-button" id="btn5" onclick="acao('VOCÊ SABIA')">VOCÊ SABIA</button>
+  </div>
+
+  <!-- Sons -->
+  <audio id="somAbrir" src="https://assets.mixkit.co/sfx/preview/mixkit-quick-win-video-game-notification-269.wav"></audio>
+  <audio id="somFechar" src="https://assets.mixkit.co/sfx/preview/mixkit-game-show-wrong-answer-949.wav"></audio>
+  <audio id="somClique" src="https://assets.mixkit.co/sfx/preview/mixkit-game-click-1114.wav"></audio>
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Espaço de Trabalho Iterativo de Doutrina. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    document.querySelectorAll('.dropdown-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const parent = button.parentElement;
+        document.querySelectorAll('.dropdown').forEach(d => {
+          if (d !== parent) d.classList.remove('active');
+        });
+        parent.classList.toggle('active');
+      });
+    });
+
+    document.querySelectorAll('[data-file]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const file = link.getAttribute('data-file');
+        const iframe = document.getElementById('iframe-artigo');
+        iframe.src = file;
+        iframe.style.display = 'block';
+        iframe.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      const isDropdown = event.target.closest('.dropdown');
+      if (!isDropdown) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+      }
+    });
+
+
+
+  const iframe = document.getElementById('iframe-artigo');
+  const btnFechar = document.getElementById('btn-fechar');
+
+  // Abrir iframe
+  document.querySelectorAll('[data-file]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const file = el.getAttribute('data-file');
+      iframe.src = file;
+      iframe.style.display = 'block';
+      btnFechar.style.display = 'inline-block';
+    });
+  });
+      // Fechar iframe
+  btnFechar.addEventListener('click', () => {
+    iframe.style.display = 'none';
+    btnFechar.style.display = 'none';
+    iframe.src = ''; // Limpa o iframe
+  });
+
+    const menu = document.getElementById("menu");
+    const somAbrir = document.getElementById("somAbrir");
+    const somFechar = document.getElementById("somFechar");
+    const somClique = document.getElementById("somClique");
+
+    const buttons = [
+      document.getElementById("btn1"),
+      document.getElementById("btn2"),
+      document.getElementById("btn3"),
+      document.getElementById("btn4"),
+      document.getElementById("btn5"),
+    ];
+
+    function toggleMenu() {
+      menu.classList.toggle("active");
+
+      if (menu.classList.contains("active")) {
+        somAbrir.play();
+        const radius = 100;
+        const angleStep = (2 * Math.PI) / buttons.length;
+
+        buttons.forEach((btn, index) => {
+          const angle = index * angleStep - Math.PI / 2;
+          const x = radius * Math.cos(angle);
+          const y = radius * Math.sin(angle);
+          btn.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        });
+      } else {
+        somFechar.play();
+        buttons.forEach((btn) => {
+          btn.style.transform = `translate(-50%, -50%)`;
+        });
+      }
+    }
+
+    function acao(acao) {
+      somClique.play();
+      alert(`Você clicou em ${acao}`);
+      // Exemplo de redirecionamento:
+      // window.location.href = 'pagina.html';
+    }
+
+
+
+
+  </script>
+
+</body>
+
+</html>

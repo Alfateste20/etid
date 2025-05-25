@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Documento Histórico - Campanha do Paraguai</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url(imagens/paraguay.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #2d3c2b;
+      color: rgb(205, 192, 4);
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-family: 'Black Ops One', cursive;
+      text-transform: uppercase;
+      font-weight: lighter;
+      text-align: center;
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .buttons a {
+      background-color: #4caf50;
+      color: white;
+      padding: 8px 12px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .buttons a:hover {
+      background-color: #388e3c;
+    }
+
+    /* Container do PDF */
+    .pdf-container {
+      flex-grow: 1; /* ocupa todo espaço restante abaixo do header */
+      display: flex;
+      justify-content: center; /* centraliza horizontalmente */
+      align-items: center;     /* centraliza verticalmente */
+      background-image: url('sua-imagem-fundo.jpg'); /* substitua pela sua imagem */
+      background-size: cover;
+      background-position: center;
+      padding: 20px;
+    }
+
+    iframe {
+      width: 30vw;   /* 80% da largura da tela */
+      height: 90vh;  /* 90% da altura da tela */
+      border: none;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Documento Histórico - Campanha do Paraguai</h1>
+    <div class="buttons">
+      <a href="pdf/1867_Campanha_do_Paraguay.pdf" target="_blank">Abrir em Nova Aba</a>
+      <a href="pdf/1867_Campanha_do_Paraguay.pdf" download>Download PDF</a>
+    </div>
+  </header>
+
+  <div class="pdf-container">
+    <iframe src="pdf/1867_Campanha_do_Paraguay.pdf"></iframe>
+  </div>
+</body>
+
+</html>
