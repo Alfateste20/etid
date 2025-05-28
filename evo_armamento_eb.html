@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria Militar</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #1a1a1a;
+            font-family: Arial, sans-serif;
+            color: #e0e0e0;
+        }
+
+        header {
+            background-color: #2e4d25;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #1f3b16;
+        }
+
+        header h1 {
+            font-family: 'Black Ops One', cursive;
+            margin: 0;
+            font-size: 2.5em;
+            color: #d0d9ce;
+            letter-spacing: 2px;
+        }
+
+        .description {
+            font-family: 'Black Ops One', cursive;
+                  text-transform: uppercase;
+      font-weight: lighter;
+            max-width: 1000px;
+            margin: 40px auto 20px auto;
+            padding: 20px;
+            background-color: #2e4d25;
+            border: 3px solid #1f3b16;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .description h2 {
+            color: #d0d9ce;
+            text-align: center;
+            margin-top: 0;
+            font-size: 1.8em;
+        }
+
+        .description p {
+            text-align: justify;
+            line-height: 1.6;
+            color: #cfd6ce;
+            font-size: 1.05em;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 40px 40px 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .gallery-item {
+            background-color: #2e4d25;
+            border: 3px solid #1f3b16;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        footer {
+            background-color: #2e4d25;
+            padding: 10px;
+            text-align: center;
+            border-top: 4px solid #1f3b16;
+            color: #a9b3a7;
+        }
+
+        /* Estilo Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .lightbox-content {
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin: 5% auto;
+            border: 5px solid #2e4d25;
+            border-radius: 8px;
+        }
+
+        .close {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .close:hover {
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Evolução da doutrina por meio dos uniformes e dos armamentos do Exército Brasileiro</h1>
+    </header>
+
+    <div class="description">
+        
+        <p>
+            Neste espaço, encontra-se expostos dez armamentos e dez coberturas/capacetes de diferentes épocas da história militar do Brasil, 
+            os quais são retratados na obra tridimensional do artista plástico Sérgio Luiz Munaretto. Além disso, a evolução tecnológica da doutrina 
+            militar acompanha cada período retratado. Ressalta-se o quanto marcante é o feito das mãos projetando-se da parede e empunhando os sabres, 
+            as espadas e os armamentos, dando, assim, a noção tridimensional ao visitante.
+        </p>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item" onclick="openLightbox('imagens/evo_armamentos/1-final.jpg')">
+            <img src="imagens/evo_armamentos/foto1.jpg" alt="Imagem 1">
+        </div>
+                <div class="gallery-item" onclick="openLightbox('imagens/evo_armamentos/2-final.jpg')">
+            <img src="imagens/evo_armamentos/foto2.jpg" alt="Imagem 1">
+        </div>
+                <div class="gallery-item" onclick="openLightbox('imagens/evo_armamentos/3-final.jpg')">
+            <img src="imagens/evo_armamentos/foto3.jpg" alt="Imagem 1">
+        </div>
+                <div class="gallery-item" onclick="openLightbox('imagens/evo_armamentos/4-final.png')">
+            <img src="imagens/evo_armamentos/foto4.jpg" alt="Imagem 1">
+        </div>
+                <div class="gallery-item" onclick="openLightbox('imagens/evo_armamentos/5-final.jpg')">
+            <img src="imagens/evo_armamentos/foto5.jpg" alt="Imagem 1">
+        </div>
+                <div class="gallery-item" onclick="openLightbox('imagens/evo_armamentos/6-final.jpg')">
+            <img src="imagens/evo_armamentos/foto6.jpg" alt="Imagem 1">
+        </div>
+                <div class="gallery-item" onclick="openLightbox('imagens/evo_armamentos/7-final.jpg')">
+            <img src="imagens/evo_armamentos/foto7.jpg" alt="Imagem 1">
+        </div>
+                <div class="gallery-item" onclick="openLightbox('imagens/evo_armamentos/8-final.jpg')">
+            <img src="imagens/evo_armamentos/foto8.jpg" alt="Imagem 1">
+        </div>
+                <div class="gallery-item" onclick="openLightbox('imagens/evo_armamentos/9-final.jpg')">
+            <img src="imagens/evo_armamentos/foto9.jpg" alt="Imagem 1">
+        </div>
+                <div class="gallery-item" onclick="openLightbox('imagens/evo_armamentos/10-final.jpg')">
+            <img src="imagens/evo_armamentos/foto10.jpg" alt="Imagem 1">
+        </div>
+
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <footer>
+        &copy; 2025 - Espaço de Trabalho Iterativo de Doutrina - C Dout Ex
+    </footer>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById("lightbox").style.display = "block";
+            document.getElementById("lightbox-img").src = src;
+        }
+
+        function closeLightbox() {
+            document.getElementById("lightbox").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
