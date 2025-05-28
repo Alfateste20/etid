@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour Virtual - ETID</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #1b1f1d;
+      font-family: Arial, sans-serif;
+      color: #ffffff;
+    }
+
+    header {
+      font-family: 'Black Ops One', cursive;
+      font-size: 2em;
+      text-transform: uppercase;
+      font-weight: unset;
+      background-color: #2f4f2f;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 4px solid #556b2f;
+    }
+
+    header h1 {
+      font-size: 2.2em;
+      color: #c0d9af;
+    }
+
+    iframe {
+      width: 100%;
+      height: 80vh;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    }
+
+    footer {
+      background-color: #2f4f2f;
+      text-align: center;
+      padding: 10px;
+      border-top: 2px solid #556b2f;
+      color: #c0d9af;
+    }
+
+    .menu-container {
+      background-image: url(imagens/parallax1.jpg);
+      position: relative;
+      width: 100%;
+      height: 400px;
+      margin: 20px auto;
+      padding: 0px;
+    }
+
+    .menu-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: none;
+      background-color: #ffffff;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 0 15px #e8f401;
+      transition: transform 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+    }
+
+    .menu-button img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+    .menu-button:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 0 20px #00ff00;
+    }
+
+    .orbit-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 0 10px #00ff00;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0px;
+    }
+
+    /* Cores diferentes */
+    #btn1 {
+      background-color: #000000;
+    }
+
+    #btn2 {
+      background-color: #282b15;
+    }
+
+    #btn3 {
+      background-color: #4b5320;
+    }
+
+    #btn4 {
+      background-color: #7f8650;
+    }
+
+    #btn5 {
+      background-color: #b7bd84;
+    }
+
+    /* Hover */
+    #btn1:hover {
+      background-color: #b7bd84;
+    }
+
+    #btn2:hover {
+      background-color: #7f8650;
+    }
+
+    #btn3:hover {
+      background-color: #000000;
+    }
+
+    #btn4:hover {
+      background-color: #282b15;
+    }
+
+    #btn5:hover {
+      background-color: #4b5320;
+    }
+
+    .menu-container.active .orbit-button {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @media (max-width: 500px) {
+      .menu-container {
+        width: 220px;
+        height: 220px;
+      }
+
+      .menu-button {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+      }
+
+      .orbit-button {
+        width: 60px;
+        height: 60px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>ETID - Tour Virtual</h1>
+  </header>
+
+  <div class="menu-container" id="menu">
+    <button class="menu-button" onclick="toggleMenu()">
+      <img src="icones/logo_cdout2.png" alt="Logo COTER" />
+    </button>
+
+    <button class="orbit-button" id="btn1"
+      onclick="trocarEspaco('https://my.matterport.com/show/?m=NC7enQxi4N9')">Espaço Cultural</button>
+    <button class="orbit-button" id="btn2"
+      onclick="trocarEspaco('https://my.matterport.com/show/?m=hTV4Wb5dEqP')">Espaço Videoconferência</button>
+      
+    <button class="orbit-button" id="btn3" onclick="trocarEspaco('#')">Espaço Iterativo</button>
+
+  </div>
+
+  <div class="container">
+    <iframe id="tourFrame" src="https://my.matterport.com/show/?m=NC7enQxi4N9" title="Tour Virtual ETID"
+      allowfullscreen></iframe>
+  </div>
+
+  <footer>
+    &copy; 2025 ETID - Todos os direitos reservados
+  </footer>
+
+  <script>
+    function trocarEspaco(url) {
+      document.getElementById('tourFrame').src = url;
+    }
+
+    const menu = document.getElementById("menu");
+    const buttons = [
+      document.getElementById("btn1"),
+      document.getElementById("btn2"),
+      document.getElementById("btn3"),
+    ];
+
+    function toggleMenu() {
+      menu.classList.toggle("active");
+
+      const isMobile = window.innerWidth <= 500;
+      const radius = isMobile ? 70 : 140; // Distância ajustada
+
+      const angleStep = (2 * Math.PI) / buttons.length;
+
+      if (menu.classList.contains("active")) {
+        buttons.forEach((btn, index) => {
+          const angle = index * angleStep - Math.PI / 2;
+          const x = radius * Math.cos(angle);
+          const y = radius * Math.sin(angle);
+          btn.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        });
+      } else {
+        buttons.forEach((btn) => {
+          btn.style.transform = `translate(-50%, -50%)`;
+        });
+      }
+    }
+  </script>
+
+</body>
+
+</html>
