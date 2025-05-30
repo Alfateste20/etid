@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Galeria de Veículos Militares</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Black Ops One', cursive;
+      background-color: #1e1e1e;
+      color: white;
+      padding: 20px;
+      text-transform: uppercase;
+      font-weight: normal;
+      background-image: url(img/bg.jpg);
+      background-size: cover;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-align: center;
+      color: #0a3401;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 4fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .item {
+      background-color: #2e2e2e;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .item:hover {
+      transform: scale(1.05);
+      background-color: #3e3e3e;
+    }
+
+    .item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .item h3 {
+      margin: 10px 0 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Galeria de Veículos Militares</h1>
+
+  <div class="galeria">
+    <div class="item" onclick="abrirModelo('leopard')">
+      <img src="img/leopard.jpg" alt="Leopard 1A5">
+      <h3>Leopard 1A5</h3>
+    </div>
+    <div class="item" onclick="abrirModelo('guarani')">
+      <img src="img/guarani.jpg" alt="VBTP Guarani">
+      <h3>VBTP Guarani</h3>
+    </div>
+    <div class="item" onclick="abrirModelo('urutu')">
+      <img src="img/urutu.jpg" alt="VBR Urutu">
+      <h3>VBR Urutu</h3>
+    </div>
+    <div class="item" onclick="abrirModelo('nauru')">
+      <img src="img/nauru.jpg" alt="nauru">
+      <h3>Nauru 1000C</h3>
+    </div>
+    <div class="item" onclick="abrirModelo('astros')">
+      <img src="img/astros.jpg" alt="astros">
+      <h3>ASTROS III AVIBRAS 8X8 TORC 30 BR</h3>
+    </div>
+    <div class="item" onclick="abrirModelo('blackhawk')">
+      <img src="img/blackhowk.jpg" alt="blackhawk">
+      <h3>Black Hawk Exército Brasileiro
+      </h3>
+    </div>
+    <div class="item" onclick="abrirModelo('c390')">
+      <img src="img/kc390.png" alt="blackhawk">
+      <h3>KC-390 Millennium
+      </h3>
+    </div>
+    <!-- Adicione mais aqui -->
+  </div>
+
+  <script>
+    function abrirModelo(modelo) {
+      window.location.href = `modelo.html?modelo=${modelo}`;
+    }
+  </script>
+</body>
+</html>

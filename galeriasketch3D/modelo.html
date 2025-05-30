@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Visualização do Modelo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #1e1e1e;
+      color: white;
+    }
+    #info-container {
+      width: 30%;
+      padding: 30px;
+      background-color: #2e2e2e;
+      overflow-y: auto;
+    }
+    #viewer-container {
+      width: 70%;
+      height: 100%;
+    }
+    #viewer {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="info-container">
+    <!-- Conteúdo será preenchido via JavaScript -->
+  </div>
+
+  <div id="viewer-container">
+    <iframe id="viewer" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    const modelos = {
+      urutu: {
+        titulo: "EE-11 Urutu 6x6",
+        descricao: "O EE-11 Urutu é um veículo blindado de transporte de pessoal anfíbio, desenvolvido pela Engesa no Brasil nos anos 1970. Amplamente utilizado pelo Exército Brasileiro, também foi exportado para diversos países.",
+        dados: [
+          "Origem: Brasil",
+          "Tripulação: 2 (motorista e comandante) + 11 soldados",
+          "Fabricante: Engesa",
+          "Peso: 13,5 toneladas",
+          "Velocidade máxima: 100 km/h em terra / 8 km/h na água",
+          "Autonomia: até 850 km",
+          "Blindagem: aço de alta resistência, protegendo contra munições de até 7,62 mm",
+          "Armamento: metralhadora .50 (12,7 mm) ou torre com canhão leve",
+          "Motor: Detroit Diesel 6V53N, 212 cv",
+          "Tração: 6x6 com capacidade anfíbia"
+        ],
+        link: "https://sketchfab.com/models/3845284339ef463faea78cc2a7552d42/embed?autostart=1&ui_watermark=0"
+      },
+      leopard: {
+        titulo: "Leopard 1A5 BR (Torc 30)",
+        descricao: "O Leopard 1A5 BR com a torre Torc 30 é uma modernização do tanque alemão adotado pelo Exército Brasileiro, oferecendo maior poder de fogo e sistemas atualizados.",
+        dados: [
+          "Origem: Alemanha / Brasil",
+          "Tripulação: 4 (comandante, artilheiro, carregador e motorista)",
+          "Peso: 42 toneladas",
+          "Armamento principal: Torre Torc 30 com canhão automático de 30 mm",
+          "Blindagem: Aço laminado com melhorias reativas",
+          "Velocidade máxima: 65 km/h",
+          "Autonomia: Cerca de 600 km",
+          "Motor: MTU MB 838 CaM 500, 830 hp",
+          "Sistema de controle de tiro modernizado",
+          "Radar e sensores térmicos de última geração"
+        ],
+        link: "https://sketchfab.com/models/094c15685bba4a14be5c6a25ccb9d94f/embed?autostart=1&ui_watermark=0"
+      },
+      guarani: {
+        titulo: "VBTP-MR Guarani",
+        descricao: "O Guarani é um veículo blindado de transporte de pessoal com tração 6x6 desenvolvido no Brasil, projetado para substituir o Urutu e aumentar a mobilidade e proteção da tropa.",
+        dados: [
+          "Origem: Brasil",
+          "Tripulação: 3 (comandante, motorista e atirador) + 8 soldados",
+          "Peso: 18 toneladas",
+          "Blindagem: Proteção contra munições de 7,62 mm e minas",
+          "Armamento: Torre com canhão 30 mm UT30BR ou metralhadora .50",
+          "Motor: Iveco Cursor 9, 383 hp",
+          "Velocidade máxima: 110 km/h",
+          "Autonomia: até 600 km",
+          "Capacidade anfíbia: Sim",
+          "Fabricante: Iveco Defence Vehicles"
+        ],
+        link: "https://sketchfab.com/models/9c7c7f48f218460c81d0a45953c9ee63/embed?autostart=1&ui_watermark=0"
+      },
+      nauru: {
+        titulo: "Drone Nauru 1000C",
+        descricao: "O Nauru 1000C é um VANT (Veículo Aéreo Não Tripulado) de fabricação nacional voltado para missões de reconhecimento, vigilância e aquisição de alvos.",
+        dados: [
+          "Origem: Brasil",
+          "Envergadura: 5,5 metros",
+          "Peso máximo de decolagem: 150 kg",
+          "Autonomia de voo: até 10 horas",
+          "Alcance operacional: 100 km (linha de visada)",
+          "Velocidade de cruzeiro: 100 km/h",
+          "Altitude operacional: até 3.000 metros",
+          "Sistema de lançamento: pista ou catapulta",
+          "Sensores: câmera eletro-óptica e infravermelha",
+          "Fabricante: XMobots"
+        ],
+        link: "https://sketchfab.com/models/e0745e004efb45128ee6b0b446444d4a/embed?autostart=1&ui_watermark=0"
+      },
+      astros: {
+      titulo: "ASTROS III AVIBRAS 8x8 TORC 30 BR",
+      descricao: "O ASTROS III é um sistema de lançamento múltiplo de foguetes desenvolvido pela Avibras, amplamente utilizado pelo Exército Brasileiro. Nesta versão modernizada 8x8 com torre TORC 30 BR, o veículo ganha capacidade de defesa próxima com poder de fogo adicional.",
+      dados: [
+        "Origem: Brasil",
+        "Configuração: 8x8",
+        "Tripulação: 3 (comandante, motorista e operador de armas)",
+        "Peso: Aproximadamente 25 toneladas",
+        "Armamento principal: Torre TORC 30 BR com canhão automático de 30 mm",
+        "Armamento secundário: Capacidade para múltiplos foguetes de artilharia de saturação (SS-30, SS-40, SS-60, SS-80)",
+        "Blindagem: Proteção balística contra calibres leves",
+        "Velocidade máxima: Cerca de 90 km/h",
+        "Autonomia: Até 600 km",
+        "Motor: Diesel de alto desempenho, aproximadamente 400 hp",
+        "Fabricante: Avibras Indústria Aeroespacial"
+      ],
+      link: "https://sketchfab.com/models/5d1bb012587f40e3b24e085f534fbc40/embed?autostart=1&ui_watermark=0"
+    },
+  blackhawk: {
+  titulo: "UH-60L Black Hawk - Exército Brasileiro",
+  descricao: "O UH-60L Black Hawk é um helicóptero utilitário multifunção de origem norte-americana, amplamente utilizado pelo Exército Brasileiro para transporte de tropas, evacuação médica, apoio logístico e missões especiais.",
+  dados: [
+    "Origem: Estados Unidos",
+    "Fabricante: Sikorsky Aircraft",
+    "Tripulação: 2 pilotos + 1 chefe de carga",
+    "Capacidade: Até 11 soldados equipados",
+    "Peso máximo de decolagem: Aproximadamente 10.000 kg",
+    "Velocidade máxima: Cerca de 295 km/h",
+    "Autonomia: Aproximadamente 590 km (sem tanques extras)",
+    "Propulsão: 2 motores General Electric T700-GE-701C",
+    "Armamento opcional: Metralhadoras laterais M240 de 7,62 mm",
+    "Uso no Brasil: Operado pelo 4º BAvEx (Batalhão de Aviação do Exército)"
+  ],
+  link: "https://sketchfab.com/models/04533bbe151548269b7d97bfb9355941/embed?autostart=1&ui_watermark=0"
+  },
+
+ c390: {
+  titulo: "KC-390 Millennium",
+  descricao: "O KC-390 Millennium é uma aeronave de transporte militar bimotora a jato desenvolvida e fabricada pela Embraer. É capaz de realizar diversas missões, como transporte de tropas e cargas, reabastecimento em voo, busca e salvamento, e combate a incêndios.",
+  dados: [
+    "Origem: Brasil",
+    "Fabricante: Embraer",
+    "Tipo: Aeronave de transporte militar",
+    "Motorização: 2 turbofans IAE V2533-E5",
+    "Empuxo: 137 kN (30.850 lbf) por motor",
+    "Velocidade máxima: Mach 0.8 (aproximadamente 988 km/h)",
+    "Alcance máximo: 8.507 km (com carga reduzida)",
+    "Carga útil máxima: 26 toneladas",
+    "Capacidade de tropas: 80 soldados",
+    "Capacidade de paraquedistas: 64 paraquedistas",
+    "Reabastecimento em voo: Sim (capacidade de receber e fornecer combustível)",
+    "Pista de pouso mínima: 1.785 metros (totalmente carregado)",
+    "Peso máximo decolagem: 89.700 kg"
+  ],
+   link: "https://sketchfab.com/models/8d43f5e9ec594960b19f74135f5e2629/embed?autostart=1&ui_watermark=0"
+}
+ 
+  };
+
+    const params = new URLSearchParams(window.location.search);
+    const modeloKey = params.get("modelo");
+    const modelo = modelos[modeloKey];
+
+    if (modelo) {
+      document.getElementById("info-container").innerHTML = `
+        <h2>${modelo.titulo}</h2>
+        <p>${modelo.descricao}</p>
+        <ul>${modelo.dados.map(item => `<li>${item}</li>`).join('')}</ul>
+      `;
+      document.getElementById("viewer").src = modelo.link;
+    } else {
+      document.getElementById("info-container").innerHTML = `
+        <h2>Modelo não encontrado</h2>
+        <p>Verifique o parâmetro na URL.</p>
+      `;
+    }
+  </script>
+</body>
+</html>
