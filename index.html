@@ -401,7 +401,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="imagens/10.png" alt="voce-sabia">
+                <img src="imagens/10.png" alt="voce-sabia"data-file="voce_sabia.html">
                 <div class="card-content">
                     <h3>Você Sabia?</h3>
                     <p>Curiosidades em artigos sobre a doutrina Militar.</p>
@@ -415,14 +415,14 @@
                 </div>
             </div>
             <div class="card">
-                <img src="imagens/icon_caxias.png" alt="Notícia 3">
+                <img src="imagens/icon_caxias.png" alt="livro_caxias" data-file="livro_caxias.html">
                 <div class="card-content">
                     <h3>Caxias e Nossa Doutrina Militar</h3>
                     <p>Documento histórico sobre Caxias e Nossa Doutrina Militar.</p>
                 </div>
             </div>
             <div class="card">
-                <img src="imagens/15.png" alt="Notícia 3">
+                <img src="imagens/15.png" alt="evo-armamento" data-file="evo_armamento_eb.html">
                 <div class="card-content">
                     <h3>A Evolução da doutrina por meio dos uniformes e dos armamentos</h3>
                     <p>A Evolução da doutrina por meio dos uniformes e dos armamentos do Exército Brasileiro.</p>
@@ -468,6 +468,39 @@
 
     <script>
 
+      document.querySelectorAll('.dropdown-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const parent = button.parentElement;
+                document.querySelectorAll('.dropdown').forEach(d => {
+                    if (d !== parent) d.classList.remove('active');
+                });
+                parent.classList.toggle('active');
+            });
+        });
+
+        document.querySelectorAll('[data-file]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const file = link.getAttribute('data-file');
+                const iframe = document.getElementById('iframe-artigo');
+                iframe.src = file;
+                iframe.style.display = 'block';
+                iframe.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        document.addEventListener('click', function (event) {
+            const isDropdown = event.target.closest('.dropdown');
+            if (!isDropdown) {
+                document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+            }
+        });
+
+
+
+
+
+
         const iframe = document.getElementById('iframe-artigo');
         const btnFechar = document.getElementById('btn-fechar');
 
@@ -499,7 +532,6 @@
             }
             item.classList.toggle('active');
         }
-
 
     </script>
 
