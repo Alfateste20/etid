@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Heróis da FEB</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url('imagens/feb3.jpg'); /* Caminho para sua imagem */
+      background-size: cover; /* Faz a imagem cobrir toda a tela */
+      background-position: center; /* Centraliza a imagem na tela */
+      background-attachment: fixed; /* Faz a imagem de fundo não se mover ao rolar a página */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding-top: 80px; /* espaço para o cabeçalho fixo */
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #090909;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    header img {
+      height: 50px;
+      margin-right: 20px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin: 0;
+      flex-grow: 1;
+      text-align: center;
+      font-family: 'Georgia', serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #f1f1f1;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+
+    .tree-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .tree-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin: 40px 0;
+    }
+
+    .tree-link {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      color: #333;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.3s, transform 0.2s;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #2e8b57;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .tree-link:hover {
+      background-color: #d0e0c0;
+      transform: scale(1.05);
+    }
+
+    .tree-link .icon {
+      width: 30px;
+      height: 30px;
+      margin-right: 8px;
+    }
+
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 0;
+      width: 80%;
+      max-width: 800px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .modal-content video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .close {
+      color: #aaa;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .tree-link {
+        min-width: 160px;
+        font-size: 14px;
+      }
+
+      header h1 {
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tree-link {
+        min-width: 140px;
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+
+      .tree-row {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="imagens/FEB.png" alt="Logo">
+    <h1>HERÓIS DA FEB</h1>
+  </header>
+
+  <div class="tree-container">
+    <div class="tree-row">
+      <a class="tree-link" onclick="openModal('videos/heroisFEB/A. Fornovo curto.mp4')"><img src="imagens/FEB.png" class="icon"> Rendição da 148 Divisão Alemã</a>
+    </div>
+    <div class="tree-row">
+      <a class="tree-link" onclick="openModal('videos/heroisFEB/B. Herói MONTE CASTELO - Ten APOLLO.mp4')"><img src="imagens/FEB.png" class="icon"> MONTE CASTELO - Ten APOLLO</a>
+      <a class="tree-link" id="link3" onclick="openModal('videos/heroisFEB/C. Herói MONTESE 3 Asp MEGA.mp4')"><img src="imagens/FEB.png" class="icon"> MONTESE - Asp MEGA</a>
+    </div>
+    <div class="tree-row">
+      <a class="tree-link" id="link4" onclick="openModal('videos/heroisFEB/D. Herói MONTESE Sgt WOLFF.mp4')"><img src="imagens/FEB.png" class="icon"> MONTESE Sgt WOLFF</a>
+      <a class="tree-link" id="link5" onclick="openModal('videos/heroisFEB/E. Herói MONTESE 2 Ten IPORAN.mp4')"><img src="imagens/FEB.png" class="icon"> MONTESE  Ten IPORAN</a>
+      <a class="tree-link" id="link6" onclick="openModal('videos/heroisFEB/F. Herói MONTESE 1 Ten RAUEN.mp4')"><img src="imagens/FEB.png" class="icon"> MONTESE  Ten RAUEN</a>
+    </div>
+    <div class="tree-row">
+      <a class="tree-link" id="link7" onclick="openModal('videos/heroisFEB/G. Herói MONTESE 4 Ten RESSTEL.mp4')"><img src="imagens/FEB.png" class="icon"> MONTESE  Ten RESSTEL</a>
+      <a class="tree-link" id="link8" onclick="openModal('videos/heroisFEB/H. Herói TORRE di NERONE - Cb MARCÍLIO.mp4')"><img src="imagens/FEB.png" class="icon"> TORRE di NERONE - Cb MARCÍLIO</a>
+      <a class="tree-link" id="link9" onclick="openModal('videos/heroisFEB/I. Heróis de Abetaia -.mp4')"><img src="imagens/FEB.png" class="icon"> Heróis de Abetaia </a>
+      <a class="tree-link" id="link10" onclick="openModal('videos/heroisFEB/J. Heróis de Collechio Fornovo - Cap Ayrosa.mp4')"><img src="imagens/FEB.png" class="icon">Collechio Fornovo - Cap Ayrosa</a>
+    </div>
+    <div class="tree-row">
+      <a class="tree-link" id="link11" onclick="openModal('videos/heroisFEB/K. Heróis de PRECÁRIA -.mp4')"><img src="imagens/FEB.png" class="icon"> 3 bravos (Cb Graciliano, Sds Clóvis e Aristides)</a>
+      <a class="tree-link" id="link12" onclick="openModal('videos/heroisFEB/L. Herói do Vale do SERCHIO - Ten DUARTE.mp4')"><img src="imagens/FEB.png" class="icon">Vale do SERCHIO - Ten DUARTE</a>
+    </div>
+  </div>
+
+  <div id="videoModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <video id="modalVideo" controls>
+        <source id="modalSource" src="" type="video/mp4">
+        Seu navegador não suporta vídeo HTML5.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    function openModal(src) {
+      const modal = document.getElementById("videoModal");
+      const video = document.getElementById("modalVideo");
+      const source = document.getElementById("modalSource");
+
+      source.src = src;
+      video.load();
+      video.play();
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("videoModal");
+      const video = document.getElementById("modalVideo");
+      video.pause();
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("videoModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+
+</body>
+</html>
