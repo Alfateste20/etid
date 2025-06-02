@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exército Brasileiro - Portal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Black Ops One', cursive;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .navbar h1 {
+            font-weight: lighter;
+            color: #fdfefc;
+            font-size: 28px;
+        }
+
+        .navbar img {
+            margin-right: 10px;
+        }
+
+        .navbar .menu-toggle {
+            display: none;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .navbar ul li {
+            position: relative;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            display: block;
+        }
+
+        .navbar ul li a:hover {
+            color: #8bc34a;
+        }
+
+        .navbar ul li .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #2c2c2c;
+            top: 35px;
+            left: 0;
+            min-width: 160px;
+            border-radius: 4px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .navbar ul li:hover .dropdown {
+            display: block;
+        }
+
+        .navbar ul li .dropdown li a {
+            padding: 10px 15px;
+            color: white;
+        }
+
+        .navbar ul li .dropdown li a:hover {
+            background-color: #8bc34a;
+            color: black;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar .menu-toggle {
+                display: block;
+                margin-left: auto;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+            }
+
+            .navbar ul.show {
+                display: flex;
+            }
+
+            .navbar ul li {
+                width: 100%;
+            }
+
+            .navbar ul li .dropdown {
+                position: static;
+                box-shadow: none;
+                background-color: #333;
+            }
+
+            .navbar ul li:hover .dropdown {
+                display: none;
+            }
+
+            .navbar ul li.active .dropdown {
+                display: block;
+            }
+        }
+
+        /* Banner */
+        .banner {
+            background: url('imagens/halletid.png') no-repeat center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 65px;
+            position: relative;
+        }
+
+        .banner::after {
+            content: "";
+            background-color: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .banner-content {
+            color: white;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .banner-content h2 {
+            font-weight: lighter;
+            font-size: 88px;
+            margin-bottom: 15px;
+        }
+
+        .banner-content p {
+            font-size: 20px;
+        }
+
+        /* Seções padrão */
+        .section {
+            padding: 60px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+        }
+
+        .section h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            border-left: 5px solid #8bc34a;
+            padding-left: 10px;
+            color: #1a1a1a;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 10px;
+        }
+
+        .card-content h3 {
+            margin-bottom: 5px;
+            color: #1a1a1a;
+        }
+
+        .card-content p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
+        /* Parallax Sections */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+            text-align: center;
+        }
+
+        .parallax::after {
+            content: "";
+            background-color: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .parallax-content {
+            z-index: 1;
+        }
+
+        .parallax-content h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .parallax-content p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .banner-content h2 {
+                font-size: 36px;
+            }
+
+            .banner-content p {
+                font-size: 18px;
+            }
+
+            .parallax-content h2 {
+                font-size: 28px;
+            }
+        }
+
+        #iframe-artigo {
+            display: none;
+            width: 100%;
+            height: 800px;
+            border: none;
+            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background: white;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <img src="icones/logo_cdout2.png" alt="Logo" class="logo-parallax" width="70" height="70">
+        <h1><a style="color: yellow;">C</a>ENTRO DE <a style="color: yellow;">DOUT</a>RINA DO <a
+                style="color: yellow;">EX</a>ÉRCITO</h1>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <ul id="navbar-menu">
+            
+            <li><a href="#" data-file="historico-etid.html">Histórico</a></li>
+            <li onclick="toggleDropdown(this)"><a href="#">Emblema C Dout Ex</a>
+                <ul class="dropdown">
+                    <li><a href="#" data-file="desc-emblema.html">Descrição do Emblema C Dout Ex</a></li>
+                    <li><a href="#" data-file="documentos/video_emblema.html">Filmete Evolução Emblema C Dout Ex</a>
+                    </li>
+                </ul>
+            </li>
+            <li onclick="toggleDropdown(this)"><a href="#">História</a>
+                <ul class="dropdown">
+                    <li><a href="#" data-file="denominacao.html">Espaço Batalha do Monte das Tabocas</a></li>
+                    <li><a href="#" data-file="portaria.html">Portaria DCEx</a></li>
+                    <li><a href="#" data-file="artigos/tecnologia-veiculos.html">Foto Aço Letras</a></li>
+                    <li><a href="#" data-file="quadro-evo.html">Evolução Descrição da Obra</a></li>
+                    <li><a href="#" data-file="evo_armamento_eb.html">Doutrina por meio dos uniformes e dos
+                            armamentos</a></li>
+                </ul>
+            </li>
+            <li onclick="toggleDropdown(this)"><a href="#">+ Conteúdos</a>
+                <ul class="dropdown">
+                    <li><a href="#" data-file="Untitled-1.html">HERÓIS DA FEB</a></li>
+                    <li><a href="#" data-file="artigos/historia-marcos.html">Campanha Aérea do 1º G Av Caça</a></li>
+                    <li><a href="#" data-file="artigos/historia-museus.html">Campanha da FEB</a></li>
+                    <li><a href="#" data-file="campanhaparaguay.html">Diário de Caxias - Agosto de 1867</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+    <section class="banner">
+        <div class="banner-content">
+            <h2>ETID DIGITAL</h2>
+            <p>Espaço de Trabalho Iterativo de Doutrina</p>
+        </div>
+    </section>
+
+    <iframe id="iframe-artigo" src="" title="Artigo do Museu Militar"></iframe>
+    <button id="btn-fechar"
+        style="display:none; justify-content: center; margin:10px; padding:8px 16px; background-color:#880000; color:white; border:none; border-radius:4px; cursor:pointer;">
+        Fechar Conteúdo
+    </button>
+
+    <!-- Seção Destaques -->
+    <section class="section">
+        <h2>Central de Conteúdos</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="imagens/6.png" alt="denomincao" data-file="denominacao.html">
+                <div class="card-content">
+                    <h3>Alusivo à denominação Histórica do ETID</h3>
+                    <p>"Espaço Batalha do Monte das Tabocas"</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="imagens/7.png" alt="portaria" data-file="pdf/portariaDcex.pdf">
+                <div class="card-content">
+                    <h3>Portaria DCEX</h3>
+                    <p>Concede Denominação Histórica de Instalação para o ETID do Comando de Operações Terrestres
+                        (COTER)</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="imagens/8.png" alt="desc-emblema" data-file="desc-emblema.html">
+                <div class="card-content">
+                    <h3>EMBLEMA C DOUT EX</h3>
+                    <p>DESCRIÇAO DO EMBLEMA DO CENTRO DE DOUTRINA DO EXERCITO.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="imagens/blindado.png" alt="galeria3d" data-file="galeriasketch3D/galeriamockup3d.html">
+                <div class="card-content">
+                    <h3>Galeria 3D</h3>
+                    <p>Galeria 3D de equipamentos e vículos militares.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="imagens/10.png" alt="voce-sabia">
+                <div class="card-content">
+                    <h3>Você Sabia?</h3>
+                    <p>Curiosidades em artigos sobre a doutrina Militar.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="imagens/tour.jpg" alt="Tour" data-file="touretidvirtual.html">
+                <div class="card-content">
+                    <h3>Tour Virtual</h3>
+                    <p>Veja imagens dos ambientes iterativos do ETID.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="imagens/icon_caxias.png" alt="Notícia 3">
+                <div class="card-content">
+                    <h3>Caxias e Nossa Doutrina Militar</h3>
+                    <p>Documento histórico sobre Caxias e Nossa Doutrina Militar.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="imagens/15.png" alt="Notícia 3">
+                <div class="card-content">
+                    <h3>A Evolução da doutrina por meio dos uniformes e dos armamentos</h3>
+                    <p>A Evolução da doutrina por meio dos uniformes e dos armamentos do Exército Brasileiro.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Parallax Valores -->
+    <section class="parallax" style="background-image: url('imagens/fotocdoutparallax.jpg');">
+        <div class="parallax-content">
+            <h2>ETID DIGITAL</h2>
+            <p>Espaço de Trabalho Iterativo de Doutrina</p>
+        </div>
+    </section>
+
+    <!-- Seção História -->
+    <section class="section">
+        <h2>Breve Histórico</h2>
+        <p>
+            O Espaço de Trabalho e Interativo de Doutrina (ETID) é uma dependência do Centro de Doutrina do Exército,
+            inaugurada em 1º de novembro de 2019, que oferece um ambiente totalmente vocacionado para o fomento,
+            discussão, estudo e desenvolvimento de temas afetos à Doutrina Militar Terrestre (DMT), oferecendo
+            meios de tecnologia da informação (TI) em apoio às atividades desenvolvidas.
+        </p>
+    </section>
+
+    <!-- Parallax Missões -->
+    <section class="parallax" style="background-image: url('imagens/fotocdoutparallax.jpg');">
+        <div class="parallax-content">
+            <h2>ETID DIGITAL</h2>
+            <p>Espaço de Trabalho Iterativo de Doutrina</p>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2025 Centro de Doutrina do Exército. Todos os direitos reservados.</p>
+    </footer>
+
+
+    <script>
+
+        const iframe = document.getElementById('iframe-artigo');
+        const btnFechar = document.getElementById('btn-fechar');
+
+        // Abrir iframe
+        document.querySelectorAll('[data-file]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const file = el.getAttribute('data-file');
+                iframe.src = file;
+                iframe.style.display = 'block';
+                btnFechar.style.display = 'inline-block';
+            });
+        });
+        // Fechar iframe
+        btnFechar.addEventListener('click', () => {
+            iframe.style.display = 'none';
+            btnFechar.style.display = 'none';
+            iframe.src = ''; // Limpa o iframe
+        });
+        function toggleMenu() {
+            const menu = document.getElementById('navbar-menu');
+            menu.classList.toggle('show');
+        }
+
+        function toggleDropdown(item) {
+            const open = document.querySelector('.navbar ul li.active');
+            if (open && open !== item) {
+                open.classList.remove('active');
+            }
+            item.classList.toggle('active');
+        }
+
+
+    </script>
+
+</body>
+
+</html>
