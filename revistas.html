@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel de Imagens Estilo Netflix</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            color: #fff;
+            background-image: url(fk2.jpg);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #141414;
+            font-family: 'Times New Roman', Times, serif;
+            background-image: url(fk2.jpg);
+        }
+        .header img {
+            height: 120px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 44px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .carousel {
+            position: relative;
+            margin: 0 5px;
+            overflow: hidden;
+            background-color: black;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item {
+            min-width: 400px;
+            margin-right: 10px;
+            margin-top: 50px;
+            margin-bottom: 10px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: ;
+        }
+        .gallery-item a {
+            display: block;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-out, opacity 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            opacity: 0.7;
+        }
+        .gallery-item:hover .info {
+            opacity: 1;
+        }
+        .info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-101%);
+        }
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .header h1 strong{
+            font-family: 'Times New Roman', Times, serif;
+            color: #fcf005;
+
+            
+            
+            
+        }
+
+        .header2 h1{
+            
+
+            font-family: 'Times New Roman', Times, serif;
+            color: #ffffff;
+            text-align: center;
+            font-size: 50px;
+            margin-top: 0px;
+
+        }
+
+        .info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logocdoutex.png" alt="Logo Esquerda">
+        <h1> <strong> C</strong>ENTRO DE <strong>DOUT</strong>RINA DO <strong>EX</strong>ÉRCITO</h1>
+        
+        <img src="logo.png" alt="Logo Direita">
+    </div>
+    <div class="header2">
+        
+        <h1> REVISTA DOUTRINA MILITAR TERRESTRE</h1>
+               
+    </div>
+    <div class="container">
+        <div class="carousel">
+            <div class="carousel-track">
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/12340/9831" target="_blank">
+                        <img src="capas/capa2.jpg" alt="Imagem 2">
+                        <div class="info">Edição n°36 - Outubro a Dezembro de 2023</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/12167/9738" target="_blank">
+                        <img src="capas/capa3.jpg" alt="Imagem 3">
+                        <div class="info">Edição n°35 - Julho a Setembro de 2023</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/11923/9517" target="_blank">
+                        <img src="capas/capa4.jpg" alt="Imagem 4">
+                        <div class="info">Edição n°34 - Abril a Junho de 2023</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/11587/9275" target="_blank">
+                        <img src="capas/capa12.jpg" alt="Imagem 4">
+                        <div class="info">Edição n°33 - Janeiro a Março de 2023</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/11360/9096" target="_blank">
+                        <img src="capas/capa5.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°32 - Outubro a Dezembro de 2022</div>
+                    </a>
+                </div>
+    
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/10921/8804" target="_blank">
+                        <img src="capas/capa6.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°31 - Junho a Setembro de 2022</div>
+                    </a>
+                </div>
+    
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/10207/8274" target="_blank">
+                        <img src="capas/capa7.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°30 - Abril a Junho de 2022</div>
+                    </a>
+                </div>
+    
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/9410/8054" target="_blank">
+                        <img src="capas/capa8.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°29 - Janeiro a Março de 2022</div>
+                    </a>
+                </div>
+    
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/8923/7700" target="_blank">
+                        <img src="capas/capa9.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°28 - Outubro a Dezembro de 2021</div>
+                    </a>
+                </div>
+    
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/8395/7279" target="_blank">
+                        <img src="capas/capa10.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°27 - Julho a Setembro de 2021</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/7744/6708" target="_blank">
+                        <img src="capas/capa11.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°26 - Abril a Julho de 2021</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/7097/6129" target="_blank">
+                        <img src="capas/capa14.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°25 - Janeiro a Março de 2021</div>
+                    </a>
+                </div>
+                <!-- Adicione mais itens da galeria conforme necessário -->
+    
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/6849/5914" target="_blank">
+                        <img src="capas/capa24.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°24 - Outubro a Dezembro de 2020</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/6379/5519" target="_blank">
+                        <img src="capas/capa23.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°23 - Julho a Setembro de 2020</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/5139/4406" target="_blank">
+                        <img src="capas/capa22.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°22 - Abril a Julho de 2020</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/3817/3171" target="_blank">
+                        <img src="capas/capa21.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°21 - Janeiro a Março de 2021</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/3263/2630" target="_blank">
+                        <img src="capas/capa20.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°20 - Outubro a Dezembro de 2019</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/2939/2373" target="_blank">
+                        <img src="capas/capa19.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°19 - Julho a Setembro de 2019</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/2346/1898" target="_blank">
+                        <img src="capas/capa18.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°18 - Abril a Julho de 2019</div>
+                    </a>
+                </div>
+    
+    
+    
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/2151/1741" target="_blank">
+                        <img src="capas/capa17.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°17 - Janeiro a Março de 2019</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/1894/1530" target="_blank">
+                        <img src="capas/capa16.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°16 - Outubro a Dezembro de 2018</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/1807/1611" target="_blank">
+                        <img src="capas/capa15.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°15 - Julho a Setembro de 2018</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/1403/1306" target="_blank">
+                        <img src="capas/capa144.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°14 - Abril a Junho de 2018</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="http://www.ebrevistas.eb.mil.br/DMT/article/view/1088/1089" target="_blank">
+                        <img src="capas/capa133.jpg" alt="Imagem 5">
+                        <div class="info">Edição n°13 - Janeiro a Março de 2018</div>
+                    </a>
+                </div>
+                <!-- Adicione mais itens da galeria conforme necessário -->
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-button" id="prevButton">&#10094;</button>
+                <button class="carousel-button" id="nextButton">&#10095;</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const track = document.querySelector('.carousel-track');
+        const items = Array.from(track.children);
+        const nextButton = document.getElementById('nextButton');
+        const prevButton = document.getElementById('prevButton');
+
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const itemWidth = items[0].getBoundingClientRect().width;
+            const newTransform = -currentIndex * itemWidth;
+            track.style.transform = `translateX(${newTransform}px)`;
+        }
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < items.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = items.length - 1;
+            }
+            updateCarousel();
+        });
+
+        setInterval(() => {
+            nextButton.click();
+        }, 2000);
+    </script>
+</body>
+</html>
